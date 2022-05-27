@@ -17,5 +17,7 @@ jobs:
       run: make
     - name: Run
       run: main.out >> out.txt
-    - name: Check
-        run: cat out.txt
+#    - name: Check
+#        run: cat out.txt
+    - name: Diff
+        run: diff out.txt README.md
