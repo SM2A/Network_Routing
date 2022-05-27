@@ -3,4 +3,4 @@ project(CN_CA3)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(CN_CA3 main.cpp)
+add_executable(Main Source/main.cpp)
