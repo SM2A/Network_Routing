@@ -15,3 +15,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Make
       run: make
+    - name: Run
+      run: main.out >> out.txt
+    - name: Check
+        run: cat out.txt
