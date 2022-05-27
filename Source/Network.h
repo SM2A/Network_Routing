@@ -4,14 +4,22 @@
 #include <vector>
 #include "Node.h"
 
-class Network{
+class Network {
 
 private:
 
-    std::vector<Node> nodes;
+    static Network *instance;
+
+    std::vector<Node *> nodes;
     std::vector<std::vector<int>> links;
 
+    Network() {
+
+    }
+
 public:
+
+    static Network *getInstance();
 
     void show();
 
@@ -20,8 +28,8 @@ public:
     void removeLink(int source, int destination);
 
     void LSRP();
-
     void LSRP(int node);
+
     void DVRP();
     void DVRP(int node);
 
