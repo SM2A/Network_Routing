@@ -21,14 +21,14 @@ void Network::show() {
 
     cout << left << setw(NUM_WIDTH) << setfill(SEPARATOR) << "      ";
 
-    for (int i = 0; i < links.size(); ++i) cout << left << setw(NUM_WIDTH) << setfill(SEPARATOR) << i;
+    for (int i = 0; i < links.size(); ++i) cout << left << setw(NUM_WIDTH) << setfill(SEPARATOR) << i + 1;
     cout << endl;
 
-    for (int i = 0; i < ((links.size() * NUM_WIDTH) + NUM_WIDTH); ++i) cout <<'_';
+    for (int i = 0; i < ((links.size() * NUM_WIDTH) + NUM_WIDTH); ++i) cout << '_';
     cout << endl;
 
     for (int i = 0; i < links.size(); ++i) {
-        cout << left << setw(NUM_WIDTH) << setfill(SEPARATOR) << i << '|';
+        cout << left << setw(NUM_WIDTH) << setfill(SEPARATOR) << i + 1 << '|';
         for (int j : links[i]) cout << left << setw(NUM_WIDTH) << setfill(SEPARATOR) << j;
         cout << endl;
     }

@@ -16,4 +16,4 @@ jobs:
       - name: Make
         run: make
       - name: Run
-        run: ./main.out
+        run: ./main.out < Test/togology.txt
