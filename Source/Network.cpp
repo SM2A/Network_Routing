@@ -1,6 +1,7 @@
 #include "Network.h"
 #include <iostream>
 #include <iomanip>
+#include <algorithm>
 
 #define NO_LINK -1
 #define SAME_NODE 0
@@ -36,8 +37,6 @@ void Network::show() {
 
 void Network::addLink(int source, int destination, int cost) {
 
-    // TODO add new node to node list
-
     if (source == destination) {
         cerr << SAME_NODE_ERROR << endl;
         return;
@@ -58,6 +57,9 @@ void Network::addLink(int source, int destination, int cost) {
 
     links[source][destination] = cost;
     links[destination][source] = cost;
+
+    if (findNode(source) == nullptr) nodes.push_back(new Node(source));
+    if (findNode(destination) == nullptr) nodes.push_back(new Node(destination));
 }
 
 void Network::modifyLink(int source, int destination, int cost) {
@@ -96,4 +98,10 @@ void Network::DVRP() {
 
 void Network::DVRP(int node) {
 
+}
+
+Node *Network::findNode(int num) {
+    auto iter = find_if(nodes.begin(), nodes.end(), [num](Node *node) -> bool { return node->getNum() == num; });
+    if (iter != nodes.end()) return iter[0];
+    else return nullptr;
 }

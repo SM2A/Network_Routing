@@ -17,6 +17,8 @@ private:
 
     }
 
+    Node* findNode(int num);
+
 public:
 
     static Network *getInstance();
