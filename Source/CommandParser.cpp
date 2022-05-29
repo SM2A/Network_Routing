@@ -1,6 +1,5 @@
 #include "CommandParser.h"
 #include <sstream>
-#include "Network.h"
 
 #define SEPARATOR ' '
 #define DELIMITER '-'
@@ -14,16 +13,21 @@ CommandParser *CommandParser::getInstance() {
     return instance;
 }
 
-void CommandParser::parse(string command) {
+void CommandParser::parse(const string &command) {
 
     string cmd;
     stringstream stream(command);
     getline(stream, cmd, SEPARATOR);
 
     if (cmd == TOPOLOGY) parseTopology(stream.str());
+    else if (cmd == MODIFY) parseModify(stream.str());
+    else if (cmd == REMOVE) parseRemove(stream.str());
+    else if (cmd == SHOW);
+    else if (cmd == LSRP);
+    else if (cmd == DVRP);
 }
 
-void CommandParser::parseTopology(string data) {
+void CommandParser::parseTopology(const string &data) {
 
     string value, temp;
     stringstream stream(data);
@@ -37,6 +41,35 @@ void CommandParser::parseTopology(string data) {
         getline(entry, destination, DELIMITER);
         getline(entry, cost, DELIMITER);
 
-        Network::getInstance()->addLink(stoi(source), stoi(destination), stoi(cost));
+        network->addLink(stoi(source), stoi(destination), stoi(cost));
     }
+}
+
+void CommandParser::parseModify(const string &data) {
+
+    string value, temp;
+    stringstream stream(data);
+    getline(stream, temp, SEPARATOR);
+
+    string source, destination, cost;
+
+    getline(stream, source, DELIMITER);
+    getline(stream, destination, DELIMITER);
+    getline(stream, cost, DELIMITER);
+
+    network->modifyLink(stoi(source), stoi(destination), stoi(cost));
+}
+
+void CommandParser::parseRemove(const string &data) {
+
+    string value, temp;
+    stringstream stream(data);
+    getline(stream, temp, SEPARATOR);
+
+    string source, destination;
+
+    getline(stream, source, DELIMITER);
+    getline(stream, destination, DELIMITER);
+
+    network->removeLink(stoi(source), stoi(destination));
 }

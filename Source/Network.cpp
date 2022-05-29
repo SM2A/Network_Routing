@@ -75,7 +75,11 @@ void Network::modifyLink(int source, int destination, int cost) {
 }
 
 void Network::removeLink(int source, int destination) {
+    source -= 1;
+    destination -= 1;
 
+    links[source][destination] = NO_LINK;
+    links[destination][source] = NO_LINK;
 }
 
 void Network::LSRP() {
