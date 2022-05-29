@@ -9,7 +9,5 @@ int main() {
     string input;
     while (getline(cin, input)) CommandParser::getInstance()->parse(input);
 
-    Network::getInstance()->show();
-
     return 0;
 }

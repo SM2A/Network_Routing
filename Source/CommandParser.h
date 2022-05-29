@@ -25,6 +25,7 @@ private:
     void parseTopology(const std::string &data);
     void parseModify(const std::string &data);
     void parseRemove(const std::string &data);
+    void parseShow();
 
 public:
 

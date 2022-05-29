@@ -22,7 +22,7 @@ void CommandParser::parse(const string &command) {
     if (cmd == TOPOLOGY) parseTopology(stream.str());
     else if (cmd == MODIFY) parseModify(stream.str());
     else if (cmd == REMOVE) parseRemove(stream.str());
-    else if (cmd == SHOW);
+    else if (cmd == SHOW) parseShow();
     else if (cmd == LSRP);
     else if (cmd == DVRP);
 }
@@ -72,4 +72,8 @@ void CommandParser::parseRemove(const string &data) {
     getline(stream, destination, DELIMITER);
 
     network->removeLink(stoi(source), stoi(destination));
+}
+
+void CommandParser::parseShow() {
+    network->show();
 }
