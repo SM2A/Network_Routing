@@ -84,19 +84,19 @@ void Network::removeLink(int source, int destination) {
     links[destination][source] = NO_LINK;
 }
 
-void Network::LSRP() {
+void Network::lsrp() {
 
 }
 
-void Network::LSRP(int node) {
+void Network::lsrp(int node) {
 
 }
 
-void Network::DVRP() {
+void Network::dvrp() {
 
 }
 
-void Network::DVRP(int node) {
+void Network::dvrp(int node) {
 
 }
 

@@ -23,8 +23,8 @@ void CommandParser::parse(const string &command) {
     else if (cmd == MODIFY) parseModify(stream.str());
     else if (cmd == REMOVE) parseRemove(stream.str());
     else if (cmd == SHOW) parseShow();
-    else if (cmd == LSRP);
-    else if (cmd == DVRP);
+    else if (cmd == LSRP) parseLSRP(stream.str());
+    else if (cmd == DVRP) parseDVRP(stream.str());
 }
 
 void CommandParser::parseTopology(const string &data) {
@@ -77,3 +77,31 @@ void CommandParser::parseRemove(const string &data) {
 void CommandParser::parseShow() {
     network->show();
 }
+
+void CommandParser::parseLSRP(const string &data) {
+
+    string value, temp;
+    stringstream stream(data);
+    getline(stream, temp, SEPARATOR);
+
+    string node;
+    getline(stream, node);
+
+    if (node.empty()) network->lsrp();
+    else network->lsrp(stoi(node));
+}
+
+void CommandParser::parseDVRP(const string &data) {
+
+    string value, temp;
+    stringstream stream(data);
+    getline(stream, temp, SEPARATOR);
+
+    string node;
+    getline(stream, node);
+
+    if (node.empty()) network->dvrp();
+    else network->dvrp(stoi(node));
+}
+
+

@@ -29,11 +29,11 @@ public:
     void modifyLink(int source, int destination, int cost);
     void removeLink(int source, int destination);
 
-    void LSRP();
-    void LSRP(int node);
+    void lsrp();
+    void lsrp(int node);
 
-    void DVRP();
-    void DVRP(int node);
+    void dvrp();
+    void dvrp(int node);
 
 };
 

@@ -26,6 +26,8 @@ private:
     void parseModify(const std::string &data);
     void parseRemove(const std::string &data);
     void parseShow();
+    void parseLSRP(const std::string &data);
+    void parseDVRP(const std::string &data);
 
 public:
 
