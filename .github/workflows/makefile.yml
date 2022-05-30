@@ -19,3 +19,5 @@ jobs:
         run: ./main.out < Test/topology.txt
       - name: Run Remove
         run: ./main.out < Test/remove.txt
+     - name: Run lsrp
+        run: ./main.out < Test/lsrp.txt
