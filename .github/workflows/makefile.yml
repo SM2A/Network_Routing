@@ -15,8 +15,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Make
         run: make
-      - name: Run Topology
-        run: ./main.out < Test/topology.txt
+#      - name: Run Topology
+#        run: ./main.out < Test/topology.txt
       - name: Run Remove
         run: ./main.out < Test/remove.txt
      - name: Run lsrp
