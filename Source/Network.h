@@ -12,12 +12,15 @@ private:
 
     std::vector<Node *> nodes;
     std::vector<std::vector<int>> links;
+    std::vector<std::vector<int>> algorithmsLinks;
 
     Network() {
 
     }
 
     Node* findNode(int num);
+    void copyLinks();
+    void dijkstra(int src);
 
 public:
 
@@ -30,10 +33,10 @@ public:
     void removeLink(int source, int destination);
 
     void lsrp();
-    void lsrp(int node);
+    void lsrp(int src);
 
     void dvrp();
-    void dvrp(int node);
+    void dvrp(int src);
 
 };
 
