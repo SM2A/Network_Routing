@@ -112,19 +112,14 @@ Node *Network::findNode(int num) {
     else return nullptr;
 }
 
-void recvPrintPath(vector<int> prev, int visited) {
-    if (prev[visited] == -1) return;
-    recvPrintPath(prev, prev[visited]);
-    cout << "->" << visited + 1;
-}
-
 void Network::dijkstra(int src) {
 
     Node *node = findNode(src);
     node->initNode(links.size());
     node->distance[src] = 0;
 
-    vector<int> visited;
+    vector<int> visited, lastCost = copyDistance(node->distance);
+
     for (int j = 0; j < links.size(); ++j) visited.push_back(0);
 
     for (int j = 0; j < links.size() - 1; j++) {
@@ -168,10 +163,12 @@ void Network::dijkstra(int src) {
         }
         cout << endl;
 
+//        if (compareCost(lastCost, node->distance)) break;
+
+        lastCost = copyDistance(node->distance);
+
         for (int k = 0; k < (links.size() * (NUM_WIDTH * 2) + NUM_WIDTH); ++k) cout << '_';
         cout << endl << endl;
-
-
     }
 
     cout << "Path: [s]->[d]   Min-Cost   Shortest Path" << endl;
@@ -193,6 +190,11 @@ void Network::dijkstra(int src) {
     node->clearNode();
 }
 
+void Network::recvPrintPath(vector<int> prev, int visited) {
+    if (prev[visited] == -1) return;
+    recvPrintPath(prev, prev[visited]);
+    cout << "->" << visited + 1;
+}
 
 void Network::copyLinks() {
 
@@ -205,4 +207,15 @@ void Network::copyLinks() {
             if (links[i][j] == -1) algorithmsLinks[i][j] = INF;
         }
     }
+}
+
+bool Network::compareCost(vector<int> prev, vector<int> now) {
+    for (int i = 0; i < min(prev.size(), now.size()); ++i) if (prev[i] != now[i]) return false;
+    return true;
+}
+
+vector<int> Network::copyDistance(vector<int> distance) {
+    vector<int> newDistance;
+    for (int & i : distance) newDistance.push_back(i);
+    return newDistance;
 }

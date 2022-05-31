@@ -21,6 +21,9 @@ private:
     Node* findNode(int num);
     void copyLinks();
     void dijkstra(int src);
+    void recvPrintPath(std::vector<int> prev, int visited);
+    std::vector<int> copyDistance(std::vector<int> distance);
+    bool compareCost(std::vector<int> prev, std::vector<int> now);
 
 public:
 
