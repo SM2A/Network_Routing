@@ -13,7 +13,7 @@ public:
 
     std::vector<int> distance;
     std::vector<int> prev;
-    std::vector<std::vector<int>> path;
+    std::vector<int> path;
 
     Node(int num) : num(num) {}
 

@@ -58,8 +58,8 @@ void Network::addLink(int source, int destination, int cost) {
 
     links[source][destination] = cost;
     links[destination][source] = cost;
-    edges.emplace_back(pair<int,int>(source,destination),cost);
-    edges.emplace_back(pair<int,int>(destination, source),cost);
+    edges.emplace_back(pair<int, int>(source, destination), cost);
+    edges.emplace_back(pair<int, int>(destination, source), cost);
 
     if (findNode(source) == nullptr) nodes.push_back(new Node(source));
     if (findNode(destination) == nullptr) nodes.push_back(new Node(destination));
@@ -90,7 +90,7 @@ void Network::removeLink(int source, int destination) {
 void Network::lsrp() {
     copyLinks();
     for (int i = 0; i < links.size(); ++i) {
-        cout << "Node " << i+1 << ":" << endl;
+        cout << "Node " << i + 1 << ":" << endl;
         dijkstra(i);
     }
 }
@@ -103,7 +103,7 @@ void Network::lsrp(int src) {
 void Network::dvrp() {
     copyLinks();
     for (int i = 0; i < links.size(); ++i) {
-        cout << "Node " << i+1 << ":" << endl;
+        cout << "Node " << i + 1 << ":" << endl;
         bellmanFord(i);
     }
 }
@@ -125,9 +125,8 @@ void Network::dijkstra(int src) {
     node->init(links.size());
     node->distance[src] = 0;
 
-    vector<int> visited/*, lastCost = copyDistance(node->distance)*/;
-
-    for (int j = 0; j < links.size(); ++j) visited.push_back(0);
+    vector<int> visited(links.size(), 0);
+    vector<int> lastCost = copyDistance(node->distance);
 
     for (int j = 0; j < links.size() - 1; j++) {
 
@@ -220,91 +219,50 @@ bool Network::compareCost(vector<int> prev, vector<int> now) {
     return true;
 }
 
-vector<int> Network::copyDistance(const vector<int>& distance) {
+vector<int> Network::copyDistance(const vector<int> &distance) {
     vector<int> newDistance;
     for (int i : distance) newDistance.push_back(i);
     return newDistance;
 }
 
-/*void printPath(vector<int>prev, int v) {
-    if (v < 0)
-        return;
-
-    printPath(prev, prev[v]);
-    cout << v + 1 << " ";
-}*/
-
-void printPath(vector<int> const &parent, int vertex, int source)
-{
-    if (vertex < 0) {
-        return;
-    }
-
-    printPath(parent, parent[vertex], source);
-    if (vertex != source) {
-        cout << ", ";
-    }
+void Network::recvPrintPath(vector<int> const &parent, int vertex, int source) {
+    if (vertex < 0) return;
+    recvPrintPath(parent, parent[vertex], source);
+    if (vertex != source) cout << " -> ";
     cout << vertex + 1;
 }
 
-/*vector<int> trace_path(int source, int destination){
-    vector<int> path;
-
-    //iterate until we reach the source vertex
-    while(destination != source){
-        //append vertex to the front of the list
-        path.push_back(destination);
-        //update the iteration variable
-        destination = destination->prev;
-    }
-
-    //also append the source vertex
-    path.push_back(source);
-
-    //return the path
-    return path;
-}*/
-
 void Network::bellmanFord(int src) {
 
-    Node* node = findNode(src);
+    Node *node = findNode(src);
     node->init(links.size());
 
     node->distance[src] = SAME_NODE;
 
-    vector<int> parent (links.size(), -1);
-
     for (int i = 0; i < links.size(); i++) {
-        for (int j = 0; j < edges.size(); j++) {
-            int u = edges[j].first.first;
-            int v = edges[j].first.second;
-            int cost = edges[j].second;
-            if ((node->distance[u] != INF) && ((node->distance[u] + cost) < node->distance[v])) {
+        for (auto &edge : edges) {
+            int u = edge.first.first;
+            int v = edge.first.second;
+            int cost = edge.second;
+            if (((node->distance[u] + cost) < node->distance[v]) && (node->distance[u] != INF)) {
+                node->path[v] = u;
                 node->distance[v] = node->distance[u] + cost;
-
-
-//                node->path[v].push_back(u);
-                parent[v] = u;
             }
         }
     }
 
-    printf("Vertex   Distance from Source\n");
-    for (int i = 0; i < links.size(); ++i) {
-        printf("%d \t\t %d\n", i + 1, node->distance[i]);
-        printPath(parent, i,src);
-        cout<<endl;
+    cout << "Dest    Next Hop    Dist    Shortest Path" << endl;
+    cout << "-----------------------------------------" << endl;
+    for (int k = 0; k < links.size(); k++) {
+        cout << k + 1
+             << "         " << k + 1
+             << "          " << node->distance[k]
+             << "        [";
+        recvPrintPath(node->path, k, src);
+        cout << "]" << endl;
     }
 
-//    for (int i : node->parent) cout << i ;
+    cout << endl;
 
-//    for (int i = 0; i <node->path.size() ; ++i) {
-//        for (int j = 0; j <node->path[i].size() ; ++j) {
-//            cout<<node->path[i][j]<<" ";
-//        }
-//        cout<<endl;
-//    }
-
-
-
+    node->clear();
 }

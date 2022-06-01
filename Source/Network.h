@@ -23,6 +23,7 @@ private:
     void copyLinks();
     void dijkstra(int src);
     void recvPrintPath(std::vector<int> prev, int visited);
+    void recvPrintPath(std::vector<int> const &parent, int vertex, int source);
     std::vector<int> copyDistance(const std::vector<int>& distance);
     bool compareCost(std::vector<int> prev, std::vector<int> now);
     void bellmanFord(int src);
