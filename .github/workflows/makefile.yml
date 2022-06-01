@@ -21,3 +21,5 @@ jobs:
         run: ./main.out < Test/remove.txt
       - name: Run LSRP
         run: ./main.out < Test/lsrp.txt
+      - name: Run DVRP
+        run: ./main.out < Test/dvrp.txt

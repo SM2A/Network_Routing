@@ -13,12 +13,12 @@ public:
 
     std::vector<int> distance;
     std::vector<int> prev;
-    std::vector<int> parent;
+    std::vector<std::vector<int>> path;
 
     Node(int num) : num(num) {}
 
-    void initNode(int count);
-    void clearNode();
+    void init(int count);
+    void clear();
 };
 
 #endif

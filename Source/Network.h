@@ -12,6 +12,7 @@ private:
 
     std::vector<Node *> nodes;
     std::vector<std::vector<int>> links;
+    std::vector<std::pair<std::pair<int,int>,int>> edges;
     std::vector<std::vector<int>> algorithmsLinks;
 
     Network() {
@@ -22,8 +23,9 @@ private:
     void copyLinks();
     void dijkstra(int src);
     void recvPrintPath(std::vector<int> prev, int visited);
-    std::vector<int> copyDistance(std::vector<int> distance);
+    std::vector<int> copyDistance(const std::vector<int>& distance);
     bool compareCost(std::vector<int> prev, std::vector<int> now);
+    void bellmanFord(int src);
 
 public:
 
