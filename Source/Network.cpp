@@ -34,6 +34,8 @@ void Network::show() {
         for (int j : links[i]) cout << left << setw(NUM_WIDTH) << setfill(SEPARATOR) << j;
         cout << endl;
     }
+
+    cout << endl;
 }
 
 void Network::addLink(int source, int destination, int cost) {
