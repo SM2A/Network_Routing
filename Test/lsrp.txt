@@ -16,7 +16,8 @@ topology 3-7-1
 topology 1-7-7
 topology 9-12-5
 topology 7-12-8
+show
+lsrp
 remove 10-4
 show
-lsrp 1
 lsrp

@@ -77,6 +77,24 @@ void Network::modifyLink(int source, int destination, int cost) {
 
     links[source][destination] = cost;
     links[destination][source] = cost;
+
+    bool sd = false, ds = false;
+
+    for (auto i : edges) {
+        if ((i.first.first == source) && (i.first.second == destination)) {
+            i.second = cost;
+            sd = true;
+        }
+        if ((i.first.second == source) && (i.first.first == destination)) {
+            i.second = cost;
+            ds = true;
+        }
+    }
+
+    if (!sd && !ds) {
+        edges.emplace_back(pair<int, int>(source, destination), cost);
+        edges.emplace_back(pair<int, int>(destination, source), cost);
+    }
 }
 
 void Network::removeLink(int source, int destination) {
@@ -85,6 +103,17 @@ void Network::removeLink(int source, int destination) {
 
     links[source][destination] = NO_LINK;
     links[destination][source] = NO_LINK;
+
+    for (int i = 0; i < edges.size(); ++i) {
+        if ((edges[i].first.first == source) && (edges[i].first.second == destination)) {
+            edges.erase(edges.begin() + i);
+            i--;
+        }
+        if ((edges[i].first.second == source) && (edges[i].first.first == destination)) {
+            edges.erase(edges.begin() + i);
+            i--;
+        }
+    }
 }
 
 void Network::lsrp() {
@@ -101,7 +130,6 @@ void Network::lsrp(int src) {
 }
 
 void Network::dvrp() {
-    copyLinks();
     for (int i = 0; i < links.size(); ++i) {
         cout << "Node " << i + 1 << ":" << endl;
         bellmanFord(i);
@@ -109,7 +137,6 @@ void Network::dvrp() {
 }
 
 void Network::dvrp(int src) {
-    copyLinks();
     bellmanFord(src - 1);
 }
 
