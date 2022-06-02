@@ -16,7 +16,10 @@ jobs:
       - name: Make
         run: make
       - name: Run Topology
-        run: ./main.out < Test/topology.txt
+        run: ./main.out < Test/topology.txt > out.txt
+      - uses: actions/upload-artifact@v3
+        with:
+          path: out.txt
       - name: Run Remove
         run: ./main.out < Test/remove.txt
       - name: Run LSRP
