@@ -20,12 +20,6 @@ jobs:
       - name: Run Remove
         run: ./main.out < Test/remove.txt
       - name: Run LSRP
-        run: ./main.out < Test/lsrp.txt > lsrp.txt
-      - uses: actions/upload-artifact@v3
-        with:
-        path: lsrp.txt
+        run: ./main.out < Test/lsrp.txt
       - name: Run DVRP
-        run: ./main.out < Test/dvrp.txt > dvrp.txt
-      - uses: actions/upload-artifact@v3
-        with:
-        path: dvrp.txt
+        run: ./main.out < Test/dvrp.txt
