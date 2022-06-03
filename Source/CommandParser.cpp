@@ -1,5 +1,5 @@
-#include "CommandParser.h"
 #include <sstream>
+#include "CommandParser.h"
 
 #define SEPARATOR ' '
 #define DELIMITER '-'
@@ -103,5 +103,3 @@ void CommandParser::parseDVRP(const string &data) {
     if (node.empty()) network->dvrp();
     else network->dvrp(stoi(node));
 }
-
-

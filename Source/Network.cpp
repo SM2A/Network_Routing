@@ -1,6 +1,6 @@
-#include "Network.h"
-#include <iostream>
 #include <iomanip>
+#include <iostream>
+#include "Network.h"
 #include <algorithm>
 
 #define INF 99999
