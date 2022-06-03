@@ -1,3 +1,4 @@
+#include <chrono>
 #include <iomanip>
 #include <iostream>
 #include "Network.h"
@@ -157,6 +158,8 @@ void Network::dijkstra(int src) {
     vector<int> visited(links.size(), 0);
     vector<int> lastCost = copyDistance(node->distance);
 
+    auto begin = chrono::high_resolution_clock::now();
+
     for (int j = 0; j < links.size() - 1; j++) {
 
         int min = INF, i, u;
@@ -205,6 +208,8 @@ void Network::dijkstra(int src) {
         cout << endl << endl;
     }
 
+    auto end = chrono::high_resolution_clock::now();
+
     cout << "Path: [s]->[d]   Min-Cost   Shortest Path" << endl;
     cout << "      ---------  ---------  --------------" << endl;
     for (int k = 0; k < links.size(); k++) {
@@ -218,6 +223,9 @@ void Network::dijkstra(int src) {
         recvPrintPath(node->prev, k);
         cout << endl;
     }
+
+    auto duration = chrono::duration_cast<chrono::microseconds>(end - begin);
+    cout<<duration.count()<<" nanosecond"<<endl;
 
     cout << endl;
 
@@ -268,6 +276,8 @@ void Network::bellmanFord(int src) {
 
     node->distance[src] = SAME_NODE;
 
+    auto begin = chrono::high_resolution_clock::now();
+
     for (int i = 0; i < links.size(); i++) {
         for (auto &edge : edges) {
             int u = edge.first.first;
@@ -280,6 +290,8 @@ void Network::bellmanFord(int src) {
         }
     }
 
+    auto end = chrono::high_resolution_clock::now();
+
     cout << "Dest    Next Hop    Dist    Shortest Path" << endl;
     cout << "-----------------------------------------" << endl;
     for (int k = 0; k < links.size(); k++) {
@@ -290,6 +302,9 @@ void Network::bellmanFord(int src) {
         recvPrintPath(node->path, k, src);
         cout << "]" << endl;
     }
+
+    auto duration = chrono::duration_cast<chrono::microseconds>(end - begin);
+    cout<<duration.count()<<" nanosecond"<<endl;
 
     cout << endl;
 
