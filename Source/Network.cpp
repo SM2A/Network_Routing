@@ -156,7 +156,7 @@ void Network::dijkstra(int src) {
     node->distance[src] = 0;
 
     vector<int> visited(links.size(), 0);
-    vector<int> lastCost = copyDistance(node->distance);
+    /*vector<int> lastCost = copyDistance(node->distance);*/
 
     /*auto begin = chrono::high_resolution_clock::now();*/
 
