@@ -23,9 +23,9 @@ jobs:
         run: ./main.out < Test/lsrp.txt > lsrp.txt
       - uses: actions/upload-artifact@v3
         with:
-        path: lsrp.txt
+          path: lsrp.txt
       - name: Run DVRP
         run: ./main.out < Test/dvrp.txt > dvrp.txt
       - uses: actions/upload-artifact@v3
         with:
-        path: dvrp.txt
+          path: dvrp.txt
