@@ -183,7 +183,7 @@ void Network::dijkstra(int src) {
             }
         }
 
-        cout << "Iter " << j + 1 << ":" << endl;
+        /*cout << "Iter " << j + 1 << ":" << endl;
 
         cout << left << setw(NUM_WIDTH * 2) << setfill(SEPARATOR) << "Dest";
 
@@ -199,18 +199,18 @@ void Network::dijkstra(int src) {
             if (node->distance[k] == INF) cout << left << setw(NUM_WIDTH * 2) << setfill(SEPARATOR) << NO_LINK;
             else cout << left << setw(NUM_WIDTH * 2) << setfill(SEPARATOR) << node->distance[k];
         }
-        cout << endl;
+        cout << endl;*/
 
         /*if (compareCost(lastCost, node->distance)) break;*/ // To end algorithm when two iterations are the same
         /*lastCost = copyDistance(node->distance);*/ // To end algorithm when two iterations are the same
 
-        for (int k = 0; k < (links.size() * (NUM_WIDTH * 2) + NUM_WIDTH); ++k) cout << '_';
-        cout << endl << endl;
+        /*for (int k = 0; k < (links.size() * (NUM_WIDTH * 2) + NUM_WIDTH); ++k) cout << '_';
+        cout << endl << endl;*/
     }
 
     auto end = chrono::high_resolution_clock::now();
 
-    cout << "Path: [s]->[d]   Min-Cost   Shortest Path" << endl;
+    /*cout << "Path: [s]->[d]   Min-Cost   Shortest Path" << endl;
     cout << "      ---------  ---------  --------------" << endl;
     for (int k = 0; k < links.size(); k++) {
         if (k == src) continue;
@@ -222,7 +222,7 @@ void Network::dijkstra(int src) {
 
         recvPrintPath(node->prev, k);
         cout << endl;
-    }
+    }*/
 
     auto duration = chrono::duration_cast<chrono::nanoseconds>(end - begin);
     cout << duration.count() << " nanosecond" << endl;
@@ -292,7 +292,7 @@ void Network::bellmanFord(int src) {
 
     auto end = chrono::high_resolution_clock::now();
 
-    cout << "Dest    Next Hop    Dist    Shortest Path" << endl;
+    /*cout << "Dest    Next Hop    Dist    Shortest Path" << endl;
     cout << "-----------------------------------------" << endl;
     for (int k = 0; k < links.size(); k++) {
         cout << k + 1
@@ -301,7 +301,7 @@ void Network::bellmanFord(int src) {
              << "        [";
         recvPrintPath(node->path, k, src);
         cout << "]" << endl;
-    }
+    }*/
 
     auto duration = chrono::duration_cast<chrono::nanoseconds>(end - begin);
     cout << duration.count() << " nanosecond" << endl;
