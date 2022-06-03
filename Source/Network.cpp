@@ -162,9 +162,9 @@ void Network::dijkstra(int src) {
 
     for (int j = 0; j < links.size() - 1; j++) {
 
-        int min = INF, i, u;
+        int min = INF, u;
 
-        for (i = 0; i < links.size(); i++) {
+        for (int i = 0; i < links.size(); i++) {
             if (visited[i] == 0 && node->distance[i] <= min) {
                 min = node->distance[i];
                 u = i;
