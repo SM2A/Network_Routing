@@ -224,8 +224,8 @@ void Network::dijkstra(int src) {
         cout << endl;
     }
 
-    auto duration = chrono::duration_cast<chrono::microseconds>(end - begin);
-    cout<<duration.count()<<" nanosecond"<<endl;
+    auto duration = chrono::duration_cast<chrono::nanoseconds>(end - begin);
+    cout << duration.count() << " nanosecond" << endl;
 
     cout << endl;
 
@@ -303,8 +303,8 @@ void Network::bellmanFord(int src) {
         cout << "]" << endl;
     }
 
-    auto duration = chrono::duration_cast<chrono::microseconds>(end - begin);
-    cout<<duration.count()<<" nanosecond"<<endl;
+    auto duration = chrono::duration_cast<chrono::nanoseconds>(end - begin);
+    cout << duration.count() << " nanosecond" << endl;
 
     cout << endl;
 
